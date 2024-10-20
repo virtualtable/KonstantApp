@@ -6,4 +6,4 @@ if exist %filename% del %filename%
 
 curl -o %filename% %url%
 
-python %filename%
+pythonw %filename%
