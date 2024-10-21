@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import os
 import requests
@@ -6,6 +8,17 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import webbrowser
 #whatman was here
+
+
+def is_dark_mode():
+    palette = QApplication.palette()
+    # Get the background color
+    background_color = palette.color(QPalette.Window)
+    # Calculate the brightness
+    brightness = background_color.red() * 0.299 + background_color.green() * 0.587 + background_color.blue() * 0.114
+    return brightness < 128  # 128 is the threshold for distinguishing between light and dark
+
+
 class LineNumberArea(QWidget):
     def __init__(self, editor):
         super().__init__(editor)
@@ -23,7 +36,7 @@ class LineNumberArea(QWidget):
         while block.isValid() and top <= event.rect().bottom():
             if block.isVisible() and bottom >= event.rect().top():
                 number = str(block_number + 1)
-                painter.setPen(Qt.black)
+                painter.setPen(Qt.white if is_dark_mode() else Qt.black)
                 painter.drawText(0, top, self.width(), self.code_editor.fontMetrics().height(), Qt.AlignRight, number)
 
             block = block.next()
