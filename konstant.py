@@ -32,7 +32,6 @@ class LineNumberArea(QWidget):
 
     def update_width(self):
         return self.fontMetrics().width(str(max(1, self.code_editor.blockCount()))) + 10
-#im still here btw whatman
 class CodeEditor(QPlainTextEdit):
     def __init__(self, *args):
         super().__init__(*args)
